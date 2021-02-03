@@ -22,10 +22,13 @@ const downloadFile = (bucket, key) => new Promise((resolve, reject) => {
         Key: key,
     })
         .createReadStream()
-        .on('end', resolve)
         .on('error', reject);
 
-    stream.pipe(fs.createWriteStream(`/tmp/${filename}`));
+    const writable = fs.createWriteStream(`/tmp/${filename}`);
+
+    stream.pipe(writable);
+
+    writable.on('finish', resolve);
 });
 
 const uploadFile = (bucket, key) => {
@@ -53,7 +56,7 @@ const tagFile = (bucket, key, status) => {
                     Value: new Date().getTime().toString(),
                 },
             ],
-        }
+        },
     };
 
     return s3.putObjectTagging(params).promise();
