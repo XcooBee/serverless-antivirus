@@ -13,7 +13,7 @@ docker start av-deamon-builder
 docker exec -it -w /home/docker av-deamon-builder yum install -y cpio yum-utils
 docker exec -it -w /home/docker av-deamon-builder yum install -y https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
 docker exec -it -w /home/docker av-deamon-builder yum-config-manager --enable epel
-docker exec -it -w /home/docker av-deamon-builder yumdownloader -x \*i686 --archlist=x86_64 clamav clamav-lib clamav-update clamd systemd-libs json-c pcre2 libxml2 bzip2-libs libtool-ltdl xz-libs libprelude gnutls nettle libcurl libnghttp2 libidn2 libssh2 openldap libffi krb5-libs keyutils-libs libunistring cyrus-sasl-lib nss nspr libselinux openssl-libs libcrypt
+docker exec -it -w /home/docker av-deamon-builder yumdownloader -x \*i686 --archlist=x86_64 clamav clamav-lib clamav-update json-c pcre2 clamd systemd-libs libxml2 bzip2-libs libtool-ltdl xz-libs libprelude gnutls nettle libcurl libnghttp2 libidn2 libssh2 openldap libffi krb5-libs keyutils-libs libunistring cyrus-sasl-lib nss nspr libselinux openssl-libs lz4 elfutils-libs elfutils-libelf libgcrypt libgpg-error libcrypt
 
 docker exec -it -w /home/docker av-deamon-builder /bin/sh -c "rpm2cpio clamav-0*.rpm | cpio -idmv"
 docker exec -it -w /home/docker av-deamon-builder /bin/sh -c "rpm2cpio clamav-lib*.rpm | cpio -idmv"
@@ -44,6 +44,11 @@ docker exec -it -w /home/docker av-deamon-builder /bin/sh -c "rpm2cpio nspr*.rpm
 docker exec -it -w /home/docker av-deamon-builder /bin/sh -c "rpm2cpio libselinux*.rpm | cpio -idmv"
 docker exec -it -w /home/docker av-deamon-builder /bin/sh -c "rpm2cpio openssl-libs*.rpm | cpio -idmv"
 docker exec -it -w /home/docker av-deamon-builder /bin/sh -c "rpm2cpio libcrypt*.rpm | cpio -idmv"
+docker exec -it -w /home/docker av-deamon-builder /bin/sh -c "rpm2cpio lz4*.rpm | cpio -idmv"
+docker exec -it -w /home/docker av-deamon-builder /bin/sh -c "rpm2cpio libgcrypt*.rpm | cpio -idmv"
+docker exec -it -w /home/docker av-deamon-builder /bin/sh -c "rpm2cpio libgpg-error*.rpm | cpio -idmv"
+docker exec -it -w /home/docker av-deamon-builder /bin/sh -c "rpm2cpio elfutils-libs*.rpm | cpio -idmv"
+docker exec -it -w /home/docker av-deamon-builder /bin/sh -c "rpm2cpio elfutils-libelf*.rpm | cpio -idmv"
 
 docker stop av-deamon-builder
 docker rm av-deamon-builder
