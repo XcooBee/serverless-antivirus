@@ -13,6 +13,7 @@ const updateDefinitionsHandler = async () => {
 };
 
 const scanFileHandler = async (event) => {
+    console.log(event);
     await runDeamon();
 
     if (event.warmer
